@@ -11,7 +11,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Устанавливаем зависимости
-RUN pip3 install tuya-connector-python
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем весь проект в рабочую директорию
 COPY . .

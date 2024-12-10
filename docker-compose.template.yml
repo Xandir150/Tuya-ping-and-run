@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  ping_monitor:
+    build: .
+    image: xandermne/vdevice:latest
+    container_name: ping_monitor
+    restart: unless-stopped
+    cap_add:
+      - SYS_TIME
+    environment:
+      - TUYA_ACCESS_ID=your_access_id
+      - TUYA_ACCESS_KEY=your_access_key
+      - TUYA_DEVICE_ID=your_device_id
+      - TUYA_GATE_DEVICE_ID=your_gate_device_id
+      - PING_HOSTNAME=192.168.1.1
+      - TELEGRAM_BOT_TOKEN=your_bot_token
+      - TELEGRAM_CHAT_ID=your_chat_id 

@@ -1,1 +1,4 @@
 ping_monitor.py
+docker-compose.yml
+__pycache__/
+*.pyc
