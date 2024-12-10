@@ -5,7 +5,7 @@ from datetime import datetime
 class TelegramNotifier:
     def __init__(self, bot_token, chat_id):
         self.bot_token = bot_token
-        self.chat_id = chat_id
+        self.chat_id = chat_id if chat_id.startswith('-') else f"@{chat_id.lstrip('@')}"
         self.base_url = f"https://api.telegram.org/bot{bot_token}"
         self.last_message_id = None
         self.last_message_date = None
@@ -44,7 +44,7 @@ class TelegramNotifier:
                         }
                     )
                     
-                    # Delete pin notification message (message_id is always new_message_id + 1)
+                    # Delete pin notification message
                     try:
                         requests.post(
                             f"{self.base_url}/deleteMessage",
@@ -54,7 +54,7 @@ class TelegramNotifier:
                             }
                         )
                     except Exception:
-                        pass  # Ignore errors when deleting pin message
+                        pass
 
                     # Delete previous message if exists
                     if self.last_message_id:
@@ -67,7 +67,7 @@ class TelegramNotifier:
                                 }
                             )
                         except Exception:
-                            pass  # Ignore errors when deleting old message
+                            pass
                     
                     self.last_message_id = new_message_id
                     self.last_message_date = current_date
@@ -90,7 +90,7 @@ class TelegramNotifier:
 
                 if not response.get("ok"):
                     logging.error(f"""
-╔══════════════════════════════════════════════════════════════════════════════
+╔════════════��═════════════════════════════════════════════════════════════════
 ║ TELEGRAM ERROR: Failed to edit message: {response.get('description')}
 ╚══════════════════════════════════════════════════════════════════════════════""")
 
