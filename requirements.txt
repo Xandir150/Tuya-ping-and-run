@@ -1,1 +1,2 @@
 tuya-iot-py-sdk
+ntplib
