@@ -5,8 +5,8 @@ This service monitors the status of smart home devices (gates and switches) via 
 ## Features
 
 - Monitors gate status (open/closed)
-- Sends silent Telegram notifications when gate status changes
-- Pins latest status message in Telegram
+- Sends or update silent Telegram notifications when gate status changes
+- Silent pin latest status message in Telegram
 - Monitors network device availability through ping
 - Controls switch based on ping results
 - Automatic time synchronization via NTP
