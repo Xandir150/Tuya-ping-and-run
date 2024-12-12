@@ -5,7 +5,19 @@ from datetime import datetime
 class TelegramNotifier:
     def __init__(self, bot_token, chat_id):
         self.bot_token = bot_token
-        self.chat_id = chat_id if chat_id.startswith('-') else f"@{chat_id.lstrip('@')}"
+        # If chat_id starts with @, it's a channel username
+        # If it's a number (as string), it's a chat ID
+        # Otherwise, add @ for username
+        if isinstance(chat_id, str):
+            if chat_id.startswith('@'):
+                self.chat_id = chat_id
+            elif chat_id.replace('-', '').isdigit():  # Check if it's a number (can be negative)
+                self.chat_id = chat_id
+            else:
+                self.chat_id = f"@{chat_id}"
+        else:
+            self.chat_id = str(chat_id)  # If number was passed
+        
         self.base_url = f"https://api.telegram.org/bot{bot_token}"
         self.last_message_id = None
         self.last_message_date = None
@@ -90,7 +102,7 @@ class TelegramNotifier:
 
                 if not response.get("ok"):
                     logging.error(f"""
-╔════════════��═════════════════════════════════════════════════════════════════
+╔══════════════════════���═══════════════════════════════════════════════════════
 ║ TELEGRAM ERROR: Failed to edit message: {response.get('description')}
 ╚══════════════════════════════════════════════════════════════════════════════""")
 

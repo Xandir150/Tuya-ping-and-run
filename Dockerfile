@@ -17,4 +17,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Определяем команду для запуска при старте контейнера
-CMD ["python", "test.py"]
+CMD ["python", "main.py"]
