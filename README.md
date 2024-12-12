@@ -63,3 +63,4 @@ Messages are sent silently (no notification sound) and automatically pinned in t
 ## License
 
 MIT
+(c) Claude-3.5-sonet
